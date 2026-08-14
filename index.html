@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EFREN — Archivo de ropa vintage</title>
+<meta name="description" content="EFREN vintage. Buzos y camperas originales, seleccionados de a uno. Envíos a todo el país.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#15130f;
+    --panel:#1e1b16;
+    --panel-2:#262219;
+    --paper:#ede3ce;
+    --paper-dim:#b9ae93;
+    --stamp:#b23a2e;
+    --stamp-dark:#8f2c22;
+    --olive:#7c8a5c;
+    --gold:#9c8552;
+    --line: rgba(237,227,206,0.14);
+    --radius-lg:26px;
+    --radius-md:16px;
+    --radius-sm:10px;
+    --disp: 'Bebas Neue', sans-serif;
+    --mono: 'Space Mono', monospace;
+    --body: 'Inter', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--paper);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body{
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(156,133,82,0.10), transparent 40%),
+      radial-gradient(circle at 88% 76%, rgba(178,58,46,0.08), transparent 45%);
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--stamp);color:var(--paper);}
+  :focus-visible{outline:2px solid var(--olive);outline-offset:3px;border-radius:6px;}
+
+  /* ---------- marquee ---------- */
+  .marquee{
+    background:var(--stamp);
+    color:var(--paper);
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid var(--stamp-dark);
+  }
+  .marquee__track{
+    display:inline-flex;
+    animation:scroll 26s linear infinite;
+    padding:9px 0;
+  }
+  .marquee__track span{padding:0 22px;display:inline-flex;align-items:center;gap:8px;}
+  .marquee__track span::before{content:"✦";opacity:.7;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:rgba(21,19,15,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .logo{
+    font-family:var(--disp);
+    font-size:30px;
+    letter-spacing:.03em;
+    display:flex;align-items:baseline;gap:8px;
+    text-decoration:none;
+  }
+  .logo em{
+    font-style:normal;font-family:var(--mono);font-size:10px;
+    color:var(--paper-dim);letter-spacing:.15em;
+    border:1px solid var(--line);border-radius:999px;padding:3px 8px;
+  }
+  .nav__links{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:600;}
+  .nav__links a{text-decoration:none;position:relative;padding:4px 0;}
+  .nav__links a::after{
+    content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;
+    background:var(--stamp);transition:width .25s ease;border-radius:2px;
+  }
+  .nav__links a:hover::after{width:100%;}
+  .nav__cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--olive);color:#15130f;font-weight:800;
+    font-size:13px;padding:10px 18px;border-radius:999px;text-decoration:none;
+    box-shadow:0 6px 0 rgba(0,0,0,0.25);transition:transform .15s ease;
+  }
+  .nav__cta:hover{transform:translateY(-2px);}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:42px;height:42px;color:var(--paper);font-size:18px;cursor:pointer;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 60px;position:relative;}
+  .hero__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--olive);display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--olive);}
+  h1.stamp{
+    font-family:var(--disp);
+    font-size:clamp(52px,7vw,92px);
+    line-height:.92;
+    letter-spacing:.01em;
+    margin:0 0 22px;
+    color:var(--paper);
+  }
+  h1.stamp .line2{color:var(--stamp);display:block;-webkit-text-stroke:1px var(--stamp);}
+  .hero p.lead{
+    font-size:17px;line-height:1.65;color:var(--paper-dim);max-width:46ch;margin:0 0 30px;
+  }
+  .hero__ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-weight:700;font-size:14px;padding:14px 24px;border-radius:999px;
+    text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+    border:1px solid transparent;cursor:pointer;transition:transform .15s ease, background .2s ease;
+    font-family:var(--body);
+  }
+  .btn-primary{background:var(--paper);color:var(--bg);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--line);color:var(--paper);background:transparent;}
+  .btn-ghost:hover{border-color:var(--paper-dim);}
+
+  /* hero visual: tag stack */
+  .tagstack{position:relative;height:360px;}
+  .tag{
+    position:absolute;width:230px;background:var(--paper);color:var(--bg);
+    border-radius:var(--radius-md);padding:18px 18px 16px;
+    box-shadow:0 20px 40px -12px rgba(0,0,0,0.6);
+    font-family:var(--mono);
+  }
+  .tag::before{
+    content:"";position:absolute;top:14px;left:14px;width:12px;height:12px;
+    border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 2px rgba(0,0,0,0.15);
+  }
+  .tag__hole{position:absolute;top:14px;left:14px;width:12px;height:12px;border-radius:50%;background:var(--bg);}
+  .tag__code{font-size:10px;letter-spacing:.1em;color:var(--stamp);font-weight:700;margin-left:26px;}
+  .tag__brand{font-family:var(--disp);font-size:26px;letter-spacing:.02em;margin:10px 0 4px;line-height:1;}
+  .tag__meta{font-size:10px;color:#6b6552;display:flex;justify-content:space-between;border-top:1px dashed #cabfa4;margin-top:10px;padding-top:8px;}
+  .tag--a{top:0;left:40px;transform:rotate(-7deg);z-index:3;}
+  .tag--b{top:78px;left:210px;transform:rotate(5deg);z-index:2;background:var(--panel-2);color:var(--paper);}
+  .tag--b .tag__hole{background:var(--panel-2);}
+  .tag--b .tag__meta{color:var(--paper-dim);border-color:var(--line);}
+  .tag--c{top:172px;left:60px;transform:rotate(3deg);z-index:1;background:var(--olive);color:#15130f;}
+  .tag--c .tag__hole{background:var(--olive);}
+  .tag--c .tag__meta{color:#2c331c;border-color:rgba(0,0,0,0.2);}
+
+  /* ---------- stat dashboard ---------- */
+  .stats{padding:10px 0 64px;}
+  .stats__grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  }
+  .stat{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-md);
+    padding:22px 20px;position:relative;overflow:hidden;
+  }
+  .stat::after{
+    content:attr(data-tag);position:absolute;top:12px;right:14px;
+    font-family:var(--mono);font-size:10px;color:var(--paper-dim);letter-spacing:.08em;
+  }
+  .stat__num{font-family:var(--disp);font-size:44px;color:var(--paper);line-height:1;}
+  .stat__num span{color:var(--stamp);}
+  .stat__label{font-size:12px;color:var(--paper-dim);margin-top:8px;}
+
+  /* ---------- catalog / dashboard controls ---------- */
+  .catalog{padding:20px 0 90px;}
+  .catalog__head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:16px;}
+  .catalog__title{font-family:var(--disp);font-size:44px;letter-spacing:.01em;}
+  .catalog__title span{color:var(--stamp);}
+  .catalog__sub{font-size:13px;color:var(--paper-dim);max-width:40ch;}
+
+  .controls{
+    display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:14px;margin-bottom:26px;
+  }
+  .pillgroup{display:flex;gap:8px;flex-wrap:wrap;}
+  .pill{
+    font-family:var(--mono);font-size:12px;letter-spacing:.03em;
+    padding:9px 16px;border-radius:999px;border:1px solid var(--line);
+    background:transparent;color:var(--paper-dim);cursor:pointer;transition:all .15s ease;
+  }
+  .pill.is-active{background:var(--paper);color:var(--bg);border-color:var(--paper);}
+  .search{
+    flex:1;min-width:180px;position:relative;
+  }
+  .search input{
+    width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--paper);
+    padding:10px 14px 10px 34px;border-radius:999px;font-family:var(--body);font-size:13px;
+  }
+  .search input::placeholder{color:var(--paper-dim);}
+  .search::before{content:"⌕";position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--paper-dim);}
+  select#sort{
+    background:var(--panel-2);border:1px solid var(--line);color:var(--paper);
+    padding:10px 14px;border-radius:999px;font-family:var(--body);font-size:13px;cursor:pointer;
+  }
+  .toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--paper-dim);font-family:var(--mono);white-space:nowrap;cursor:pointer;user-select:none;}
+  .toggle input{appearance:none;width:34px;height:19px;border-radius:999px;background:var(--panel-2);border:1px solid var(--line);position:relative;cursor:pointer;transition:background .2s;}
+  .toggle input::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:var(--paper-dim);transition:transform .2s;}
+  .toggle input:checked{background:var(--olive);border-color:var(--olive);}
+  .toggle input:checked::after{transform:translateX(15px);background:#15130f;}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .card{
+    background:var(--paper);color:var(--bg);border-radius:var(--radius-lg);
+    padding:18px;position:relative;display:flex;flex-direction:column;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-5px);box-shadow:0 18px 30px -14px rgba(0,0,0,0.5);}
+  .card__top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .card__hole{width:13px;height:13px;border-radius:50%;background:var(--bg);}
+  .card__stock{
+    font-family:var(--mono);font-size:9px;letter-spacing:.06em;display:flex;align-items:center;gap:5px;
+    text-transform:uppercase;color:#5c5645;
+  }
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--olive);}
+  .dot.off{background:var(--stamp);}
+  .card__visual{
+    height:104px;border-radius:var(--radius-sm);margin:14px 0 12px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--disp);font-size:15px;letter-spacing:.04em;text-align:center;
+    color:var(--paper);
+  }
+  .card__cat{font-family:var(--mono);font-size:9px;color:var(--stamp);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+  .card__name{font-family:var(--body);font-weight:800;font-size:15.5px;line-height:1.25;margin-bottom:10px;min-height:38px;}
+  .card__prices{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap;}
+  .card__price{font-family:var(--disp);font-size:22px;}
+  .card__price--old{font-family:var(--mono);font-size:11px;color:#8a836e;text-decoration:line-through;}
+  .card__off{font-family:var(--mono);font-size:10px;background:var(--stamp);color:var(--paper);padding:2px 7px;border-radius:6px;}
+  .card__meta{
+    font-family:var(--mono);font-size:9.5px;color:#6b6552;display:flex;justify-content:space-between;
+    border-top:1px dashed #cabfa4;margin-top:12px;padding-top:9px;
+  }
+  .card__cta{
+    margin-top:12px;background:var(--bg);color:var(--paper);text-align:center;
+    padding:10px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none;
+    display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s ease;
+    border:none;font-family:var(--body);cursor:pointer;width:100%;
+  }
+  .card__cta:hover{background:var(--stamp-dark);}
+  .card__cta--ghost{
+    margin-top:8px;background:transparent;color:var(--bg);border:1px solid #cabfa4;
+  }
+  .card__cta--ghost:hover{background:rgba(21,19,15,0.06);}
+  .card__cta:disabled{opacity:.6;cursor:wait;}
+  .card.is-out{opacity:.55;}
+  .card.is-out .card__cta{pointer-events:none;background:#4c473a;color:#a29c88;}
+
+  .empty{
+    grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--paper-dim);
+    font-family:var(--mono);font-size:13px;border:1px dashed var(--line);border-radius:var(--radius-lg);
+  }
+
+  /* ---------- features ---------- */
+  .features{padding:60px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);}
+  .features__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .feature{padding:6px;}
+  .feature__icon{
+    width:44px;height:44px;border-radius:var(--radius-sm);background:var(--panel-2);
+    display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:16px;border:1px solid var(--line);
+  }
+  .feature h3{font-family:var(--disp);font-size:22px;font-weight:400;margin:0 0 8px;letter-spacing:.02em;}
+  .feature p{font-size:13.5px;color:var(--paper-dim);line-height:1.6;margin:0;max-width:34ch;}
+
+  /* ---------- about ---------- */
+  .about{padding:90px 0;}
+  .about__grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;}
+  .about__label{font-family:var(--mono);font-size:12px;color:var(--olive);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
+  .about h2{font-family:var(--disp);font-size:38px;line-height:1.1;margin:0 0 18px;font-weight:400;}
+  .about p{color:var(--paper-dim);font-size:15px;line-height:1.75;margin:0 0 14px;max-width:52ch;}
+  .stampcircle{
+    width:230px;height:230px;border-radius:50%;border:2px dashed var(--gold);
+    display:flex;align-items:center;justify-content:center;margin:0 auto;
+    font-family:var(--disp);text-align:center;color:var(--paper);font-size:15px;line-height:1.3;
+    position:relative;
+  }
+  .stampcircle .core{
+    width:170px;height:170px;border-radius:50%;background:var(--panel-2);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+  }
+  .stampcircle .core b{font-size:30px;color:var(--stamp);display:block;}
+
+  /* ---------- instagram cta ---------- */
+  .igband{padding:70px 0;text-align:center;border-top:1px solid var(--line);}
+  .igband h2{font-family:var(--disp);font-size:clamp(34px,5vw,56px);margin:0 0 10px;font-weight:400;}
+  .igband p{color:var(--paper-dim);font-size:14px;margin:0 0 28px;}
+  .igrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;max-width:760px;margin:0 auto 30px;}
+  .igrid div{aspect-ratio:1;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--panel-2),var(--panel));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--paper-dim);}
+
+  /* ---------- contact ---------- */
+  .contact{padding:0 0 100px;}
+  .contact__panel{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:48px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;
+  }
+  .contact__panel h2{font-family:var(--disp);font-size:38px;margin:0 0 10px;font-weight:400;}
+  .contact__panel p{color:var(--paper-dim);font-size:14px;margin:0;max-width:44ch;}
+  .contact__links{display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px;}
+  .contact__links a{text-decoration:none;display:flex;align-items:center;gap:8px;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:34px 0;}
+  .foot__grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .foot__links{display:flex;gap:22px;list-style:none;padding:0;margin:0;font-size:12.5px;color:var(--paper-dim);}
+  .foot__links a{text-decoration:none;}
+  .foot__legal{font-size:11px;color:#5c5645;font-family:var(--mono);}
+
+  @media (max-width:920px){
+    .hero__grid{grid-template-columns:1fr;}
+    .tagstack{height:280px;margin-top:20px;}
+    .stats__grid{grid-template-columns:repeat(2,1fr);}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .features__grid{grid-template-columns:1fr;}
+    .about__grid{grid-template-columns:1fr;}
+    .about__grid .stampcircle{margin-top:20px;}
+    .nav__links{display:none;}
+    .burger{display:block;}
+    .contact__panel{grid-template-columns:1fr;text-align:center;}
+    .contact__links{align-items:center;}
+    .igrid{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr;}
+    .stats__grid{grid-template-columns:1fr 1fr;}
+    .catalog__title{font-size:34px;}
+    .contact__panel{padding:30px 22px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .marquee__track{animation:none;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" id="marqueeTrack"></div>
+</div>
+
+<header>
+  <nav class="nav wrap">
+    <a href="#top" class="logo">EFREN <em>vintage</em></a>
+    <ul class="nav__links">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#nosotros">Quiénes somos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a class="nav__cta" href="https://wa.me/542324537426" target="_blank" rel="noopener">↳ WhatsApp</a>
+    <button class="burger" id="burger" aria-label="Abrir menú">☰</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <div class="eyebrow">Pieza única · N.° de archivo activo</div>
+        <h1 class="stamp">ROPA CON<span class="line2">HISTORIA</span></h1>
+        <p class="lead">Buzos y camperas vintage, elegidos de a uno. Cada prenda que entra a EFREN pasa por revisión, se le asigna un número de archivo y sale a la calle otra vez.</p>
+        <div class="hero__ctas">
+          <a href="#catalogo" class="btn btn-primary">Ver el catálogo ↓</a>
+          <a href="https://wa.me/542324537426" target="_blank" rel="noopener" class="btn btn-ghost">Escribinos por WhatsApp</a>
+        </div>
+      </div>
+      <div class="tagstack" aria-hidden="true">
+        <div class="tag tag--a">
+          <span class="tag__hole"></span>
+          <div class="tag__code">EFR—014</div>
+          <div class="tag__brand">NIKE</div>
+          <div class="tag__meta"><span>BUZO</span><span>TALLE M</span></div>
+        </div>
+        <div class="tag tag--b">
+          <span class="tag__hole"></span>
+          <div class="tag__code">EFR—008</div>
+          <div class="tag__brand">GUESS</div>
+          <div class="tag__meta"><span>BUZO</span><span>TALLE L</span></div>
+        </div>
+        <div class="tag tag--c">
+          <span class="tag__hole"></span>
+          <div class="tag__code">EFR—002</div>
+          <div class="tag__brand">LE COQ</div>
+          <div class="tag__meta"><span>CAMPERA</span><span>TALLE S</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS DASHBOARD -->
+  <section class="stats">
+    <div class="wrap stats__grid">
+      <div class="stat" data-tag="LIVE">
+        <div class="stat__num" data-count="17">0</div>
+        <div class="stat__label">Prendas archivadas</div>
+      </div>
+      <div class="stat" data-tag="HOY">
+        <div class="stat__num"><span data-count="5">0</span></div>
+        <div class="stat__label">Disponibles ahora mismo</div>
+      </div>
+      <div class="stat" data-tag="PROMO">
+        <div class="stat__num" data-count="25">0<span>%</span></div>
+        <div class="stat__label">Descuento promedio activo</div>
+      </div>
+      <div class="stat" data-tag="ENVÍOS">
+        <div class="stat__num" style="font-size:26px;">$105K<span>+</span></div>
+        <div class="stat__label">Envío gratis a partir de este monto</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG / DASHBOARD -->
+  <section class="catalog" id="catalogo">
+    <div class="wrap">
+      <div class="catalog__head">
+        <div>
+          <div class="catalog__title">Último <span>drop</span></div>
+          <div class="catalog__sub">Filtrá, buscá y ordená el archivo como quieras. Se actualiza a medida que entran y salen piezas.</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="pillgroup" id="catFilter">
+          <button class="pill is-active" data-cat="todos">Todos</button>
+          <button class="pill" data-cat="buzo">Buzos</button>
+          <button class="pill" data-cat="campera">Camperas</button>
+        </div>
+        <div class="search">
+          <input type="text" id="searchInput" placeholder="Buscar por marca o modelo…">
+        </div>
+        <select id="sort">
+          <option value="drop">Orden: último drop</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="discount">Mayor descuento</option>
+        </select>
+        <label class="toggle">
+          <input type="checkbox" id="onlyStock">
+          Solo disponibles
+        </label>
+      </div>
+
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="wrap features__grid">
+      <div class="feature">
+        <div class="feature__icon">📦</div>
+        <h3>Envíos</h3>
+        <p>A todo el país con Andreani y Correo Argentino. Gratis superando los $105.000.</p>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">🔎</div>
+        <h3>Seguimiento</h3>
+        <p>Cada pedido va con código de seguimiento y acompañamiento hasta que llega.</p>
+      </div>
+      <div class="feature">
+        <div class="feature__icon">💬</div>
+        <h3>Atención real</h3>
+        <p>Sin bots. Respuestas claras por WhatsApp, de una persona que conoce el stock.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="wrap about__grid">
+      <div class="stampcircle" aria-hidden="true">
+        <div class="core"><b>EFREN</b>vintage 🫂</div>
+      </div>
+      <div>
+        <div class="about__label">Quiénes somos</div>
+        <h2>Un archivo, no un depósito.</h2>
+        <p>EFREN es un proyecto chico que busca, revisa y selecciona buzos y camperas vintage uno por uno. Nada de lotes al bulto: si una pieza no vale la pena, no entra al catálogo.</p>
+        <p>Cada prenda que ves acá pasó por nuestras manos antes que por las tuyas. Tu confianza es lo que sostiene esto — por eso la atención es directa, sin vueltas.</p>
+        <a href="https://instagram.com/efren.vintage" target="_blank" rel="noopener" class="btn btn-ghost">Ver más en Instagram ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM BAND -->
+  <section class="igband">
+    <div class="wrap">
+      <h2>@efren.vintage</h2>
+      <p>Los drops nuevos se anuncian primero ahí.</p>
+      <div class="igrid" aria-hidden="true">
+        <div>👕</div><div>🧥</div><div>👟</div><div>🧢</div><div>👕</div><div>🧥</div>
+      </div>
+      <a href="https://instagram.com/efren.vintage" target="_blank" rel="noopener" class="btn btn-primary">Seguir en Instagram</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contacto">
+    <div class="wrap">
+      <div class="contact__panel">
+        <div>
+          <h2>¿Buscás algo puntual?</h2>
+          <p>Contanos qué marca, talle o estilo estás buscando y te avisamos apenas entra una pieza así al archivo.</p>
+        </div>
+        <div class="contact__links">
+          <a href="https://wa.me/542324537426" target="_blank" rel="noopener" class="btn btn-primary">↳ Escribir por WhatsApp</a>
+          <a href="tel:02324537426">☎ 02324 53-7426</a>
+          <a href="https://instagram.com/efren.vintage" target="_blank" rel="noopener">◎ @efren.vintage</a>
+          <span>📍 Calle 18 &amp; Calle 7</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot__grid">
+    <a href="#top" class="logo" style="font-size:22px;">EFREN <em>vintage</em></a>
+    <ul class="foot__links">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#nosotros">Quiénes somos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://instagram.com/efren.vintage" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+    <div class="foot__legal">© EFREN vintage — archivo no oficial de referencia</div>
+  </div>
+</footer>
+
+<script>
+/* ---------------- data ---------------- */
+const products = [
+  {code:"EFR-017", cat:"buzo", brand:"Buzo Nike Lacrosse", price:44900, old:60000, off:25, stock:true},
+  {code:"EFR-016", cat:"buzo", brand:"Buzo Guess", price:44900, old:60000, off:25, stock:true},
+  {code:"EFR-015", cat:"buzo", brand:"Buzo Nike", price:44900, old:62000, off:28, stock:true},
+  {code:"EFR-014", cat:"buzo", brand:"Buzo Adidas", price:41900, old:53000, off:21, stock:true},
+  {code:"EFR-013", cat:"buzo", brand:"Buzo I Love NY", price:41900, old:60000, off:30, stock:true},
+  {code:"EFR-012", cat:"buzo", brand:"Buzo Adidas", price:44900, old:60000, off:25, stock:false},
+  {code:"EFR-011", cat:"buzo", brand:"Buzo King's", price:42900, old:60000, off:29, stock:false},
+  {code:"EFR-010", cat:"campera", brand:"Campera Le Coq Sportif", price:39900, old:54000, off:26, stock:false},
+  {code:"EFR-009", cat:"buzo", brand:"Buzo Champion", price:42900, old:60000, off:29, stock:false},
+  {code:"EFR-008", cat:"buzo", brand:"Buzo Mahagrid", price:42500, old:60000, off:29, stock:false},
+  {code:"EFR-007", cat:"buzo", brand:"Buzo NY", price:44900, old:62000, off:28, stock:false},
+  {code:"EFR-006", cat:"buzo", brand:"Buzo Adidas Fantasma", price:44900, old:60000, off:25, stock:false},
+  {code:"EFR-005", cat:"buzo", brand:"Buzo Tommy", price:41900, old:52000, off:19, stock:false},
+  {code:"EFR-004", cat:"buzo", brand:"Buzo Mark Gonzalez", price:39900, old:58000, off:31, stock:false},
+  {code:"EFR-003", cat:"buzo", brand:"Buzo Los Angeles", price:42900, old:60000, off:29, stock:false},
+  {code:"EFR-002", cat:"campera", brand:"Campera Simple", price:39900, old:46000, off:13, stock:false},
+  {code:"EFR-001", cat:"buzo", brand:"Buzo Milegarment", price:44900, old:60000, off:25, stock:false},
+];
+
+const swatches = ["#7c8a5c","#b23a2e","#9c8552","#4c5a72","#a0562f","#5c6b4d"];
+function swatchFor(str){
+  let h=0; for(const c of str) h=(h*31+c.charCodeAt(0))>>>0;
+  return swatches[h % swatches.length];
+}
+function money(n){ return "$" + n.toLocaleString("es-AR"); }
+
+/* ---------------- marquee ---------------- */
+const promo = "20% OFF POR TRANSFERENCIA / EFECTIVO — ENVÍO GRATIS SUPERANDO LOS $105.000 — 3 Y 6 CUOTAS SIN INTERÉS";
+document.getElementById("marqueeTrack").innerHTML =
+  Array(6).fill(`<span>${promo}</span>`).join("");
+
+/* ---------------- render grid ---------------- */
+const grid = document.getElementById("productGrid");
+let state = { cat:"todos", q:"", sort:"drop", onlyStock:false };
+
+function render(){
+  let list = products.slice();
+
+  if(state.cat !== "todos") list = list.filter(p => p.cat === state.cat);
+  if(state.onlyStock) list = list.filter(p => p.stock);
+  if(state.q.trim()){
+    const q = state.q.trim().toLowerCase();
+    list = list.filter(p => p.brand.toLowerCase().includes(q));
+  }
+
+  if(state.sort === "price-asc") list.sort((a,b)=>a.price-b.price);
+  else if(state.sort === "price-desc") list.sort((a,b)=>b.price-a.price);
+  else if(state.sort === "discount") list.sort((a,b)=>b.off-a.off);
+  else list.sort((a,b)=> b.code.localeCompare(a.code));
+
+  if(list.length === 0){
+    grid.innerHTML = `<div class="empty">No hay piezas archivadas que coincidan con esa búsqueda todavía.<br>Probá con otro filtro o escribinos y te avisamos cuando llegue algo así.</div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(p => {
+    const color = swatchFor(p.brand);
+    const waMsg = encodeURIComponent(`Hola! Me interesa ${p.brand} (${p.code}), ¿sigue disponible?`);
+    return `
+    <article class="card ${p.stock ? "" : "is-out"}">
+      <div class="card__top">
+        <span class="card__hole"></span>
+        <span class="card__stock"><span class="dot ${p.stock?"":"off"}"></span>${p.stock ? "En stock" : "Sin stock"}</span>
+      </div>
+      <div class="card__visual" style="background:${color};">${p.cat === "campera" ? "🧥" : "👕"}</div>
+      <div class="card__cat">${p.cat}</div>
+      <div class="card__name">${p.brand}</div>
+      <div class="card__prices">
+        <span class="card__price">${money(p.price)}</span>
+        <span class="card__price--old">${money(p.old)}</span>
+        <span class="card__off">-${p.off}%</span>
+      </div>
+      <div class="card__meta"><span>${p.code}</span><span>Envío gratis</span></div>
+      ${p.stock ? `
+      <button class="card__cta card__pay" data-brand="${p.brand.replace(/"/g,'&quot;')}" data-price="${p.price}" data-code="${p.code}">
+        Pagar ahora ↳
+      </button>
+      <a class="card__cta card__cta--ghost" href="https://wa.me/542324537426?text=${waMsg}" target="_blank" rel="noopener">
+        Consultar por WhatsApp
+      </a>` : `
+      <a class="card__cta" href="https://wa.me/542324537426?text=${waMsg}" target="_blank" rel="noopener">
+        Agotado
+      </a>`}
+    </article>`;
+  }).join("");
+}
+render();
+
+/* ---------------- pago con Mercado Pago ---------------- */
+grid.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".card__pay");
+  if (!btn) return;
+
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = "Generando pago...";
+
+  try {
+    const res = await fetch("/api/create-preference", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: `${btn.dataset.brand} (${btn.dataset.code}) — EFREN Vintage`,
+        price: Number(btn.dataset.price),
+        quantity: 1,
+        code: btn.dataset.code,
+      }),
+    });
+
+    if (!res.ok) throw new Error("No se pudo generar el pago");
+    const data = await res.json();
+
+    // Mientras probás, usa sandbox_init_point. Cuando pases a producción, cambiá a data.init_point.
+    window.location.href = data.sandbox_init_point || data.init_point;
+  } catch (err) {
+    console.error(err);
+    alert("No pudimos iniciar el pago. Probá de nuevo o escribinos por WhatsApp.");
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+});
+
+/* ---------------- controls ---------------- */
+document.getElementById("catFilter").addEventListener("click", e=>{
+  const btn = e.target.closest(".pill");
+  if(!btn) return;
+  document.querySelectorAll("#catFilter .pill").forEach(b=>b.classList.remove("is-active"));
+  btn.classList.add("is-active");
+  state.cat = btn.dataset.cat;
+  render();
+});
+document.getElementById("searchInput").addEventListener("input", e=>{
+  state.q = e.target.value; render();
+});
+document.getElementById("sort").addEventListener("change", e=>{
+  state.sort = e.target.value; render();
+});
+document.getElementById("onlyStock").addEventListener("change", e=>{
+  state.onlyStock = e.target.checked; render();
+});
+
+/* ---------------- mobile nav ---------------- */
+document.getElementById("burger").addEventListener("click", ()=>{
+  const links = document.querySelector(".nav__links");
+  const open = links.style.display === "flex";
+  links.style.display = open ? "none" : "flex";
+  links.style.flexDirection = "column";
+  links.style.position = "absolute";
+  links.style.top = "64px";
+  links.style.right = "24px";
+  links.style.background = "var(--panel)";
+  links.style.border = "1px solid var(--line)";
+  links.style.borderRadius = "16px";
+  links.style.padding = "16px 22px";
+  links.style.gap = "14px";
+});
+
+/* ---------------- count-up stats ---------------- */
+const counters = document.querySelectorAll("[data-count]");
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffixEl = el.querySelector("span");
+      const suffix = suffixEl ? suffixEl.outerHTML : "";
+      let cur = 0;
+      const step = Math.max(1, Math.round(target/40));
+      const tick = ()=>{
+        cur = Math.min(target, cur+step);
+        el.innerHTML = cur + suffix;
+        if(cur < target) requestAnimationFrame(tick);
+      };
+      tick();
+      io.unobserve(el);
+    }
+  });
+}, {threshold:.4});
+counters.forEach(c=>io.observe(c));
+</script>
+</body>
+</html>
